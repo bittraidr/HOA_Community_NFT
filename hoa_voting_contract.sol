@@ -159,9 +159,9 @@ contract PropertyNFT is ERC721Full {
     }
 }
 
-// deployer: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
-// propertyNFT_address: 0xd9145CCE52D386f254917e481eB44e9943F39138
-// PolicyFactory_address: 0x4815A8Ba613a3eB21A920739dE4cA7C439c7e1b1
+// deployer: 
+// propertyNFT_address: 
+// PolicyFactory_address: 
 
-// user_1: 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2
-// user_2: 0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db
+// user_1: 
+// user_2: 
