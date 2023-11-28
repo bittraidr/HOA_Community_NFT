@@ -10,16 +10,16 @@ Our mission is to revolutionize homeowners' association (HOA) governance by inte
 
 <p align="center">
   <a href="https://turquoise-persistent-swordtail-499.mypinata.cloud/ipfs/QmYvMPG7mDbwTSaoXMB2h4v9b25mvARjVXfUfFtaj2hCsZ?_gl=1*1cfg10*_ga*OTA4Mjc1NTIuMTY5OTU5MDYwMA..*_ga_5RMPXG14TE*MTcwMDExMjQ2My43LjEuMTcwMDExMzI1Mi4xMi4wLjA">
-    <img src="https://github.com/Nievz/HOA/blob/main/Images/NFT6.png" alt="Video 1" width="200"/>
+    <img src="https://github.com/bittraidr/HOA_Community_NFT/blob/main/Images/NFT6.png" alt="Video 1" width="200"/>
   </a>
   <a href="https://turquoise-persistent-swordtail-499.mypinata.cloud/ipfs/QmUWL6hWeLeLmtnL2jDRDD62FJAthYZszVqtSjUYWjHSTT?_gl=1*2h3vhr*_ga*OTA4Mjc1NTIuMTY5OTU5MDYwMA..*_ga_5RMPXG14TE*MTcwMDExMjQ2My43LjEuMTcwMDExMzI0My4yMS4wLjA">
-    <img src="https://github.com/Nievz/HOA/blob/main/Images/NFT7.png" alt="Video 2" width="200"/>
+    <img src="https://github.com/bittraidr/HOA_Community_NFT/blob/main/Images/NFT7.png" alt="Video 2" width="200"/>
   </a>
   <a href="https://turquoise-persistent-swordtail-499.mypinata.cloud/ipfs/QmRVcK1w3CnR1Bz2UbRmngySoUf5f2LQs72EuQD6hBE9cU?_gl=1*1boj1t8*_ga*OTA4Mjc1NTIuMTY5OTU5MDYwMA..*_ga_5RMPXG14TE*MTcwMDExMjQ2My43LjEuMTcwMDExMzIwOS41NS4wLjA">
-    <img src="https://github.com/Nievz/HOA/blob/main/Images/NFT3.png" alt="Video 3" width="200"/>
+    <img src="https://github.com/bittraidr/HOA_Community_NFT/blob/main/Images/NFT3.png" alt="Video 3" width="200"/>
   </a>
   <a href="https://turquoise-persistent-swordtail-499.mypinata.cloud/ipfs/QmUNveENrMQteNXpArkxFe4DvuffjqLXzvz4avhwbgHN5T?_gl=1*mp1nwr*_ga*OTA4Mjc1NTIuMTY5OTU5MDYwMA..*_ga_5RMPXG14TE*MTcwMDExMjQ2My43LjEuMTcwMDExMzIwNi41OC4wLjA">
-    <img src="https://github.com/Nievz/HOA/blob/main/Images/NFT5.png" alt="Video 4" width="200"/>
+    <img src="https://github.com/bittraidr/HOA_Community_NFT/blob/main/Images/NFT5.png" alt="Video 4" width="200"/>
   </a>
 </p>
 
@@ -53,15 +53,15 @@ Each proposal is subject to a community vote, ensuring that every member has a v
 ### Christmas Party Proposal
 One of our most exciting proposals this season is the "Community Christmas Party". This event aims to bring our community together to celebrate the festive season with activities for all ages, including live music, a catered dinner, and a special visit from Santa Claus.
 ### Christmas Party Proposal
-![Featured Proposal Image](https://github.com/Nievz/HOA/blob/main/Images/christmas%20party.png)
+![Featured Proposal Image](https://github.com/bittraidr/HOA_Community_NFT/blob/main/Images/christmas%20party.png)
 
 ### Autumn Harvest Festival Proposal
 The "Autumn Harvest Festival" proposal aims to celebrate the season's beauty with a pumpkin patch, hayrides, and a pie-baking contest, bringing together community members for a day of fun and relaxation.
-![Autumn Harvest Festival](https://github.com/Nievz/HOA/blob/main/Images/Autumn%20proposal.png)
+![Autumn Harvest Festival](https://github.com/bittraidr/HOA_Community_NFT/blob/main/Images/Autumn%20proposal.png)
 
 ### Summer Party Celebration Proposal
 Our "Summer Party Celebration" proposal focuses on hosting a vibrant party at the community pool area. This event will feature a barbecue cookout, live DJ, and pool games, ensuring a fun-filled day for all ages.
-![Summer Party Celebration](https://github.com/Nievz/HOA/blob/main/Images/summer%20proposal.png)
+![Summer Party Celebration](https://github.com/bittraidr/HOA_Community_NFT/blob/main/Images/summer%20proposal.png)
 
 ## NFT Storage and Management with Pinata IPFS
 
@@ -76,7 +76,7 @@ At the heart of our Blockchain Community Board are our dedicated team members, a
 
 ## Fintech Data Analysts
 Our fintech data analysts are the backbone of our financial technology initiatives. With their deep understanding of financial markets, blockchain technology, and data analysis, they ensure that our solutions are not only technologically sound but also financially viable and sustainable. They keep their fingers on the pulse of the latest market trends, providing invaluable insights that drive our community's financial decisions.
-![About Our Team](https://github.com/Nievz/HOA/blob/main/Images/AOT.png)
+![About Our Team](https://github.com/bittraidr/HOA_Community_NFT/blob/main/Images/About%20our%20team.png)
 
 ## Conclusion
 The Blockchain Community Board is more than just an application; it's a new way of envisioning community living and governance. By blending blockchain technology with user-friendly interfaces, it opens up possibilities for more harmonious, transparent, and engaged community living. As we continue to develop and enhance its features, we aim to set a new standard for how communities interact, decide, and thrive together.
