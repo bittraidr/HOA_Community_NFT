@@ -3,7 +3,13 @@ import random
 import base64
 from web3 import Web3
 import json
+import os
+from dotenv import load_dotenv
+load_dotenv('SECRETS.env')
 
+CHRISTMAS_CONTRACT_ADDRESS = os.getenv("CHRISTMAS_CONTRACT_ADDRESS")
+THANKSGIVING_CONTRACT_ADDRESS = os.getenv("THANKSGIVING_CONTRACT_ADDRESS")
+SUMMER_CONTRACT_ADDRESS = os.getenv("SUMMER_CONTRACT_ADDRESS")
 # Set the page config to make the background black and the layout wider
 st.set_page_config(page_title=" Blockchain Community Board", layout="wide")
 
@@ -11,16 +17,15 @@ st.set_page_config(page_title=" Blockchain Community Board", layout="wide")
 w3 = Web3(Web3.HTTPProvider('http://127.0.0.1:7545'))
 
 # Check if the connection is successful
-if w3.is_connected():
+if w3.isConnected():
     st.write('Connected to Ethereum network')
 else:
     st.write('Failed to connect to Ethereum network')
     
-@st.cache_resource
-def load_contract(): 
+def load_contract(contract_address): 
   # Smart contract details
-  contract_address = '0xe7d990c6f50a241D01e3194f73118b3f9A9e15D5'
-  contract_abi_path = 'ABI.json'  # Replace with the actual path
+  # contract_address = '0xac940a821FF5B8fEfDD0977861ee53E297918289'
+  contract_abi_path = 'contract_abi.json'  # Replace with the actual path
 #  account_address = '0xYourAccountAddress'  # The Ethereum address interacting with the contract
 
   # Read the contract ABI from the compiled file
@@ -31,8 +36,26 @@ def load_contract():
   contract = w3.eth.contract(address=contract_address, abi=contract_abi)
   return contract
 
-contract=load_contract()
+# Load the contract address from your Ganache accounts
+ganache_accounts = w3.eth.accounts
 
+# Streamlit UI
+st.title("Interact with Ethereum Contract")
+
+contract1=load_contract(CHRISTMAS_CONTRACT_ADDRESS)
+contract2=load_contract(THANKSGIVING_CONTRACT_ADDRESS)
+contract3=load_contract(SUMMER_CONTRACT_ADDRESS)   
+
+# # Streamlit UI
+# st.title("Vote using Streamlit")
+
+# # Replace 'your_choice' with the actual choice you want to vote for
+# vote_choice = st.number_input("Enter your vote choice:", min_value=0, max_value=255, value=0, step=1)
+
+# if st.button("Vote"):
+#     result = vote(vote_choice)
+#     st.write(result)
+    
 # Custom CSS to enhance the appearance
 st.markdown(
     """
@@ -130,15 +153,14 @@ def get_video_html(path):
     base64_video = base64.b64encode(video_bytes).decode('utf-8')
     return f'<video loop autoplay class="custom-box"><source src="data:video/mp4;base64,{base64_video}" type="video/mp4"></video>'
   
-contract_address_options = [
-        "0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2",
-        "0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db",
-        # Add more contract addresses as needed
-    ]
-selected_contract_address = st.selectbox("Select Contract Address", contract_address_options)
+# contract_address_options = [
+#     web3.eth.accounts
+#     ]
+# selected_wallet_address = st.selectbox("Select Wallet Address", contract_address_options)
 
-contract_abi_path = 'path/to/your/compiled_contract_abi.json'
+contract_address_options = st.selectbox("Select Contract Address", ganache_accounts)
 
+contract_abi_path = 'contract_abi.json'
 
 # Custom CSS for styling, including proposal boxes
 st.markdown(
@@ -184,14 +206,38 @@ christmas_party_vote = st.selectbox(
     ["Approve", "Reject", "Abstain"],
     key="christmas_party_vote"
 )
+
+# Button to vote
+if st.button("Click Here To Vote", key="vote1"):
+    # Call the vote function in the smart contract
+    vote_option = christmas_party_vote.lower()  # Convert to lowercase to match the Solidity function parameter
+    try:
+        # Ensure that the voting is done from the selected address
+        sender_address = selected_wallet_address
+
+        # Call the vote function in the smart contract
+        transaction = contract1.functions.vote(vote_option).transact({'from': sender_address})
+        
+        # build transaction
+        # sign transaction w/ pkey
+        # send raw transaction
+
+        st.write(f"Vote submitted from address: {sender_address}")
+    except Exception as e:
+        st.write(f"Error: {str(e)}")
+        
 # Community Christmas Party Proposal
 st.markdown('<div class="proposal-box"><h2>Community Christmas Party Proposal</h2><p>Christmas Party Proposal Voting Results.</p></div>', unsafe_allow_html=True)
-fake_vote_count_christmas = random.randint(0, 100)
-st.progress(fake_vote_count_christmas)
-st.write(f"Current vote count: {fake_vote_count_christmas}%")
-if st.button("Click Here To Vote", key="vote1"):
-        st.write("You voted on the Community Christmas Party Proposal")
-
+# fake_vote_count_christmas = random.randint(0, 100)
+# st.progress(fake_vote_count_christmas)
+# optionId_mapping=contract1.functions.optionId().call()
+# optionId_mapping={'approve': 0, 'deny': 0, 'abstain': 0}
+unique_options_count=contract1.functions.view_unique_options_count().call()
+for each_option_idx in range(unique_options_count): 
+    current_option=contract1.functions._unique_options(each_option_idx).call()
+    st.write(f'Option 1: {current_option} - {contract1.functions.optionId(current_option).call()}')
+    
+# st.write(f"Current vote count: {fake_vote_count_christmas}, You voted on the Christmas Party Celebration Proposal")
 
 # Proposal2 in a styled box
 st.markdown(
@@ -215,13 +261,27 @@ fall_party_vote = st.selectbox(
     ["Approve", "Reject", "Abstain"],
     key="fall_party_vote"
 )
+
+# Button to vote
+if st.button("Click Here To Vote", key="vote2"):
+    # Call the vote function in the smart contract
+    vote_option = fall_party_vote.lower()  # Convert to lowercase to match the Solidity function parameter
+    try:
+        # Ensure that the voting is done from the selected address
+        sender_address = selected_wallet_address
+
+        # Call the vote function in the smart contract
+        transaction = contract2.functions.vote(vote_option).transact({'from': sender_address})
+
+        st.write(f"Vote submitted from address: {sender_address}, You voted on the Autumn Harvest Festival Proposal")
+    except Exception as e:
+        st.write(f"Error: {str(e)}")
+        
 # Autumn Harvest Festival Proposal
 st.markdown('<div class="proposal-box"><h2>Autumn Harvest Festival Proposal</h2><p>Autumn Harvest Festival Voting Results.</p></div>', unsafe_allow_html=True)
 fake_vote_count_autumn = random.randint(0, 100)
 st.progress(fake_vote_count_autumn)
 st.write(f"Current vote count: {fake_vote_count_autumn}%")
-if st.button("Click Here To Vote", key="vote2"):
-        st.write("You voted on the Autumn Harvest Festival Proposal")
 
 
 # Proposal3 in a styled box
@@ -246,13 +306,26 @@ summer_party_vote = st.selectbox(
     ["Approve", "Reject", "Abstain"],
     key="summer_party_vote"
 )
+
+if st.button("Click Here To Vote", key="vote3"):
+    # Call the vote function in the smart contract
+    vote_option = summer_party_vote.lower()  # Convert to lowercase to match the Solidity function parameter
+    try:
+        # Ensure that the voting is done from the selected address
+        sender_address = selected_wallet_address
+
+        # Call the vote function in the smart contract
+        transaction = contract3.functions.vote(vote_option).transact({'from': sender_address})
+
+        st.write(f"Vote submitted from address: {sender_address}, You voted on the Summer Party Celebration Proposal")
+    except Exception as e:
+        st.write(f"Error: {str(e)}")
+        
 # Summer Party Celebration Proposal
 st.markdown('<div class="proposal-box"><h2>Summer Party Celebration Proposal</h2><p>Summer Party proposal Voting Results.</p></div>', unsafe_allow_html=True)
 fake_vote_count_summer = random.randint(0, 100)
 st.progress(fake_vote_count_summer)
 st.write(f"Current vote count: {fake_vote_count_summer}%")
-if st.button("Click Here To Vote", key="vote3"):
-        st.write("You voted on the Summer Party Celebration Proposal")
 
 st.markdown('</div>', unsafe_allow_html=True)
 
@@ -308,5 +381,3 @@ st.header("Join Our Community")
 st.write("Be part of our growing HOA community of digital NFT.")
 st.button("Join on Discord")
 st.button("Follow on Twitter")
-
-

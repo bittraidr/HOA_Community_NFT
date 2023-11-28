@@ -11,6 +11,7 @@ contract PolicyFactory is ERC20, ERC20Detailed, ERC20Mintable{
     mapping(address=>uint) public _currently_owned_count;
     mapping(string=>uint) public optionId;
     PropertyNFT public property_contract;
+    string[] public _unique_options;
     address[] public _unique_owners;
 
     constructor(PropertyNFT _property_contract, string memory policy_name, string memory policy_id) ERC20Detailed(policy_name, policy_id,18) public {
@@ -27,10 +28,24 @@ contract PolicyFactory is ERC20, ERC20Detailed, ERC20Mintable{
         }
     }
 
+    function view_unique_options_count() public view returns(uint){
+        return _unique_options.length;
+    }
     
     function vote(string memory option) public  {
+        bool doesListContainElement = false;
         require(balanceOf(msg.sender)>0, "Sorry, you cannot vote right now!");
         optionId[option] += balanceOf(msg.sender);
+        for (uint i=0; i < _unique_options.length; i++) {
+            if (keccak256(abi.encodePacked(option)) == keccak256(abi.encodePacked(_unique_options[i]))) {
+                doesListContainElement=true;
+                break;
+            }
+        }
+        if (doesListContainElement) {
+        } else {
+            _unique_options.push(option);
+        }
         _burn(msg.sender, balanceOf(msg.sender));
     }
 }
@@ -110,10 +125,3 @@ contract PropertyNFT is ERC721Full {
         // return the property id
     }
 }
-
-// deployer: 0x5B38Da6a701c568545dCfcB03FcB875f56beddC4
-// propertyNFT_address: 0xd9145CCE52D386f254917e481eB44e9943F39138
-// PolicyFactory_address: 0x4815A8Ba613a3eB21A920739dE4cA7C439c7e1b1
-
-// user_1: 0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2
-// user_2: 0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db
