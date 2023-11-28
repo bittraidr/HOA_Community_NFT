@@ -139,19 +139,6 @@ selected_contract_address = st.selectbox("Select Contract Address", contract_add
 
 contract_abi_path = 'path/to/your/compiled_contract_abi.json'
 
-# Connect to the contract
-w3, contract = load_contract()
-    
-# Proposal Section
-st.markdown(
-    """
-    <div class="proposal-text">
-        <h3>HOA Proposals</h3>
-        <p>Review and vote on the following proposals. Your vote is important to us!</p>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
 
 # Custom CSS for styling, including proposal boxes
 st.markdown(
