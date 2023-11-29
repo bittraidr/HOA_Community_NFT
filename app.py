@@ -80,7 +80,7 @@ st.markdown(
         background-color: #FFFFFF; color: white; border: none; padding: 10px 20px;
         font-size: 16px; margin: 4px 2px; cursor: pointer; transition-duration: 0.4s;
     }
-    button:hover, .connect-wallet:hover { background-color: #555; }
+    button:hover, .connect-wallet:hover { background-color: #76B903; }
     img:hover { opacity: 0.7; }
     .stSelectbox .css-2b097c-container { width: 50%; margin: 0 auto; }
     .connect-wallet {
@@ -153,12 +153,8 @@ def get_video_html(path):
     base64_video = base64.b64encode(video_bytes).decode('utf-8')
     return f'<video loop autoplay class="custom-box"><source src="data:video/mp4;base64,{base64_video}" type="video/mp4"></video>'
   
-# contract_address_options = [
-#     web3.eth.accounts
-#     ]
-# selected_wallet_address = st.selectbox("Select Wallet Address", contract_address_options)
 
-contract_address_options = st.selectbox("Select Contract Address", ganache_accounts)
+selected_wallet_address = st.selectbox("Select Contract Address", ganache_accounts)
 
 contract_abi_path = 'contract_abi.json'
 
@@ -210,7 +206,7 @@ christmas_party_vote = st.selectbox(
 # Button to vote
 if st.button("Click Here To Vote", key="vote1"):
     # Call the vote function in the smart contract
-    vote_option = christmas_party_vote.lower()  # Convert to lowercase to match the Solidity function parameter
+    vote_option = christmas_party_vote  # Convert to lowercase to match the Solidity function parameter
     try:
         # Ensure that the voting is done from the selected address
         sender_address = selected_wallet_address
@@ -228,16 +224,17 @@ if st.button("Click Here To Vote", key="vote1"):
         
 # Community Christmas Party Proposal
 st.markdown('<div class="proposal-box"><h2>Community Christmas Party Proposal</h2><p>Christmas Party Proposal Voting Results.</p></div>', unsafe_allow_html=True)
-# fake_vote_count_christmas = random.randint(0, 100)
-# st.progress(fake_vote_count_christmas)
-# optionId_mapping=contract1.functions.optionId().call()
-# optionId_mapping={'approve': 0, 'deny': 0, 'abstain': 0}
-unique_options_count=contract1.functions.view_unique_options_count().call()
-for each_option_idx in range(unique_options_count): 
+
+vote_count_christmas = 0
+unique_options_count_1=contract1.functions.view_unique_options_count().call()
+for each_option_idx in range(unique_options_count_1): 
     current_option=contract1.functions._unique_options(each_option_idx).call()
-    st.write(f'Option 1: {current_option} - {contract1.functions.optionId(current_option).call()}')
-    
-# st.write(f"Current vote count: {fake_vote_count_christmas}, You voted on the Christmas Party Celebration Proposal")
+    st.write(f'{current_option}: {contract1.functions.optionId(current_option).call()}')
+    vote_count_christmas+=contract1.functions.optionId(current_option).call()
+
+vote_percentage_christmas = (vote_count_christmas/(vote_count_christmas+contract1.functions.totalSupply().call()))
+st.progress(vote_percentage_christmas)
+st.write(f"Current vote count: {vote_percentage_christmas*100}%")
 
 # Proposal2 in a styled box
 st.markdown(
@@ -265,7 +262,7 @@ fall_party_vote = st.selectbox(
 # Button to vote
 if st.button("Click Here To Vote", key="vote2"):
     # Call the vote function in the smart contract
-    vote_option = fall_party_vote.lower()  # Convert to lowercase to match the Solidity function parameter
+    vote_option = fall_party_vote # Convert to lowercase to match the Solidity function parameter
     try:
         # Ensure that the voting is done from the selected address
         sender_address = selected_wallet_address
@@ -279,10 +276,16 @@ if st.button("Click Here To Vote", key="vote2"):
         
 # Autumn Harvest Festival Proposal
 st.markdown('<div class="proposal-box"><h2>Autumn Harvest Festival Proposal</h2><p>Autumn Harvest Festival Voting Results.</p></div>', unsafe_allow_html=True)
-fake_vote_count_autumn = random.randint(0, 100)
-st.progress(fake_vote_count_autumn)
-st.write(f"Current vote count: {fake_vote_count_autumn}%")
+vote_count_autumn = 0
+unique_options_count_2=contract2.functions.view_unique_options_count().call()
+for each_option_idx in range(unique_options_count_2): 
+    current_option=contract2.functions._unique_options(each_option_idx).call()
+    st.write(f'{current_option}: {contract2.functions.optionId(current_option).call()}')
+    vote_count_autumn+=contract2.functions.optionId(current_option).call()
 
+vote_percentage_autumn = (vote_count_autumn/(vote_count_autumn+contract2.functions.totalSupply().call()))
+st.progress(vote_percentage_autumn)
+st.write(f"Current vote count: {round((vote_percentage_autumn*100),2)}%")
 
 # Proposal3 in a styled box
 st.markdown(
@@ -309,7 +312,7 @@ summer_party_vote = st.selectbox(
 
 if st.button("Click Here To Vote", key="vote3"):
     # Call the vote function in the smart contract
-    vote_option = summer_party_vote.lower()  # Convert to lowercase to match the Solidity function parameter
+    vote_option = summer_party_vote  # Convert to lowercase to match the Solidity function parameter
     try:
         # Ensure that the voting is done from the selected address
         sender_address = selected_wallet_address
@@ -323,10 +326,17 @@ if st.button("Click Here To Vote", key="vote3"):
         
 # Summer Party Celebration Proposal
 st.markdown('<div class="proposal-box"><h2>Summer Party Celebration Proposal</h2><p>Summer Party proposal Voting Results.</p></div>', unsafe_allow_html=True)
-fake_vote_count_summer = random.randint(0, 100)
-st.progress(fake_vote_count_summer)
-st.write(f"Current vote count: {fake_vote_count_summer}%")
+vote_count_summer = 0
+unique_options_count_3=contract3.functions.view_unique_options_count().call()
+for each_option_idx in range(unique_options_count_3): 
+    current_option=contract3.functions._unique_options(each_option_idx).call()
+    st.write(f'{current_option}: {contract3.functions.optionId(current_option).call()}')
+    vote_count_summer+=contract3.functions.optionId(current_option).call()
 
+vote_percentage_summer = (vote_count_summer/(vote_count_summer+contract3.functions.totalSupply().call()))
+st.progress(vote_percentage_summer)
+st.write(f"Current vote count: {round((vote_percentage_summer*100),2)}%")
+    
 st.markdown('</div>', unsafe_allow_html=True)
 
 
